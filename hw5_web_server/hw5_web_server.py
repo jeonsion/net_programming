@@ -27,7 +27,16 @@ while True:
     method, filename, protocol = request_lines[0].split(' ')
     filename = filename[1:]
 
-        
+    if filename.endswith('.ico'):
+            f=open(filename, 'rb')
+            data = f.read()
+            f.close()
+            mime_type = 'image/x-icon'
+            body = data
+            header = HTTP_RESPONSE_200_OK.format(mime_type)
+            conn.send(header.encode())
+            conn.send(body)
+            conn.close()
     
     # 파일 존재 여부 확인
     if os.path.isfile(filename):
@@ -40,16 +49,8 @@ while True:
             header = HTTP_RESPONSE_200_OK.format(mime_type)
             conn.send(header.encode())
             conn.send(body.encode('euc-kr'))
+            conn.close()
         elif filename.endswith('.png'):
-            f=open(filename, 'rb')
-            data = f.read()
-            f.close()
-            mime_type = 'image/jpg'
-            body = data
-            header = HTTP_RESPONSE_200_OK.format(mime_type)
-            conn.send(header.encode())
-            conn.send(body)
-        elif filename.endswith('.ico'):
             f=open(filename, 'rb')
             data = f.read()
             f.close()
@@ -58,11 +59,13 @@ while True:
             header = HTTP_RESPONSE_200_OK.format(mime_type)
             conn.send(header.encode())
             conn.send(body)
+            conn.close()
     else :
         head = HTTP_RESPONSE_404_NOT_FOUND_HEAD
         body = HTTP_RESPONSE_404_NOT_FOUND_BODY
         conn.send(head.encode())
         conn.send(body.encode())
+        conn.close()
         break        
 
 
