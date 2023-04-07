@@ -5,7 +5,7 @@ BUF_SiZE = 1024
 LENGTH = 4
 
 sock = socket(AF_INET, SOCK_STREAM)
-sock.bind(('localhost', 7777))
+sock.bind(('localhost', 7778))
 sock.listen()
 print('File server is running...')
 

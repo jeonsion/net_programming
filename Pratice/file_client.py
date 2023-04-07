@@ -5,7 +5,7 @@ BUF_SIZE = 1024
 LENGTH = 4
 
 s = socket(AF_INET, SOCK_STREAM)
-s.connect(('localhost', 7777))
+s.connect(('localhost', 7778))
 s.send(b'Hello')
 
 msg = s.recv(BUF_SIZE)
