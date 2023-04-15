@@ -6,15 +6,17 @@ import os
 import datetime
 import random
 
+#시간을 형식에 맞게 출력하기 위한 코드 -----------------------
 now = datetime.datetime.now()
 formatted_time = now.strftime("%a %b %d %H:%M:%S %Y")
+#____________________________________________________
 
 
 BUF_SIZE = 1024
-LENGHT = 4
+LENGHT = 4  #파일크기 4바이트
 data = []
 sock = socket(AF_INET, SOCK_STREAM)
-sock.bind(('localhost', 8072))
+sock.bind(('localhost', 8072))  #Device_02의 포트번호는 8072
 sock.listen()
 print("IoT Device 02 is running...")
 
@@ -28,6 +30,7 @@ while True:
     else:
         print('Accept the client\'s request : ', msg.decode()) # Hello
     command = msg.decode()
+    
     if command == 'Request':
         temp = random.randint(40, 140)
         humid = random.randint(2000, 6000)

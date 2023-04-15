@@ -23,10 +23,16 @@ while True:
 
     # 클라이언트 요청 수신
     request_data = conn.recv(1024).decode()
+    
+    # 요청 데이터 파싱 request_lines는 GET /index.html HTTP/1.1의 형식을 가진다.
     request_lines = request_data.split('\r\n')
     method, filename, protocol = request_lines[0].split(' ')
+    
+    #method, filename, protocol 중에서 filename만 추출
     filename = filename[1:]
 
+    
+    #ico는 Not Found에도 불구하고 띄워줘야 하므로 따로 빼준다.
     if filename.endswith('.ico'):
             f=open(filename, 'rb')
             data = f.read()
@@ -46,9 +52,9 @@ while True:
             f.close()
             mime_type = 'text/html'
             body = data
-            header = HTTP_RESPONSE_200_OK.format(mime_type)
+            header = HTTP_RESPONSE_200_OK.format(mime_type) 
             conn.send(header.encode())
-            conn.send(body.encode('euc-kr'))
+            conn.send(body.encode('euc-kr'))            #한글 텍스트 파일을 읽어오기 위해 euc-kr로 인코딩
             conn.close()
         elif filename.endswith('.png'):
             f=open(filename, 'rb')
