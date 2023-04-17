@@ -32,8 +32,8 @@ class MyComplex:
         result_imaginary = self.real_1 * other.imaginary_1 + self.imaginary_1 * other.real_1
         return MyComplex(result_real, result_imaginary, 0, 0)
 
-a = MyComplex(3, -4, 0, 0)
-b = MyComplex(-5, 2, 0, 0)
+a = MyComplex(3, -4, -5, 2)
+
 
 c = a.multiply(b)
 
