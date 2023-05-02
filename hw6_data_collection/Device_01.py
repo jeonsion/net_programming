@@ -5,13 +5,12 @@ from socket import *
 import os
 import datetime
 import random
-
+import struct
 now = datetime.datetime.now()
 formatted_time = now.strftime("%a %b %d %H:%M:%S %Y")
 
 
 BUF_SIZE = 1024
-LENGHT = 4
 data = []
 sock = socket(AF_INET, SOCK_STREAM)
 sock.bind(('localhost', 8071))

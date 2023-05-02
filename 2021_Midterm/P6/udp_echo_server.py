@@ -7,7 +7,7 @@
 import socket
 import random
 
-port = 2527
+port = 7000
 
 BUFSIZE = 1024
 
