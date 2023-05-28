@@ -1,0 +1,17 @@
+import socket
+
+port = 5013
+BUFSIZE = 1024
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+while True:
+    msg = input('Enter message to send : ')
+    if msg =='q':
+        break
+    
+    sock.sendto(msg.encode(),('localhost', port))
+    data, addr = sock.recvfrom(BUFSIZE)
+    print('Server says: ', data.decode())
+sock.close()
+    
